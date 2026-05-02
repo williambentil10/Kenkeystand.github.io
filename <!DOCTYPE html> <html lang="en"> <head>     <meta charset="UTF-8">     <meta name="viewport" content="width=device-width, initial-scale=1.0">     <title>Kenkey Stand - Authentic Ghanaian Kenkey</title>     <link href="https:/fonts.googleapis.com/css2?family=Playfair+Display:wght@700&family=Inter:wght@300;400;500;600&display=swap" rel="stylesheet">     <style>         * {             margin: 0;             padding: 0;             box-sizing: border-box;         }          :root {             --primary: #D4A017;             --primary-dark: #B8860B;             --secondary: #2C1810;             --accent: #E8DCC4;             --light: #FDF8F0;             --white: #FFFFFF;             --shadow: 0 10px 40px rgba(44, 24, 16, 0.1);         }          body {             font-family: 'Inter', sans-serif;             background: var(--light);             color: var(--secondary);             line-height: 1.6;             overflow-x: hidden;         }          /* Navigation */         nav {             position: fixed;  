@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenkey Stand - Authentic Ghanaian Kenkey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #D4A017;
+            --primary-dark: #B8860B;
+            --secondary: #2C1810;
+            --accent: #E8DCC4;
+            --light: #FDF8F0;
+            --white: #FFFFFF;
+            --shadow: 0 10px 40px rgba(44, 24, 16, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 248, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "🌽";
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .cart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            background: var(--secondary);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #4A2C1A 100%);
+            color: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 160, 23, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15rem;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            background: var(--white);
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            background: var(--light);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 5%;
+            background: var(--light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(44, 24, 16, 0.15);
+        }
+
+        .product-image {
+            height: 240px;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8DCC4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .add-to-cart {
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Bulk Order Section */
+        .bulk-order {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--secondary) 0%, #4A2C1A 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .bulk-order h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .bulk-order p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .bulk-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bulk-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 160, 23, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .bulk-card:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .bulk-card.selected {
+            background: rgba(212, 160, 23, 0.2);
+            border-color: var(--primary);
+        }
+
+        .bulk-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .bulk-card .price-tag {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .bulk-card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .bulk-card ul li {
+            padding: 0.3rem 0;
+            opacity: 0.9;
+        }
+
+        .bulk-card ul li::before {
+            content: "✓ ";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* Order Form */
+        .order-section {
+            padding: 6rem 5%;
+            background: var(--white);
+        }
+
+        .order-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(212, 160, 23, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--white);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 2px solid #e0e0e0;
+            width: fit-content;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .qty-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .submit-order {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-order:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 160, 23, 0.3);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .close-cart:hover {
+            background: var(--light);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8DCC4 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-details p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 1px solid #eee;
+            background: var(--light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cart-total span:last-child {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1.2rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 3000;
+            transition: right 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification.show {
+            right: 2rem;
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 4rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                font-size: 10rem;
+                height: 300px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Kenkey Stand</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Our Kenkey</a></li>
+            <li><a href="#bulk">Bulk Orders</a></li>
+            <li><a href="#order">Place Order</a></li>
+            <li><button class="cart-btn" onclick="toggleCart()">
+                🛒 Cart
+                <span class="cart-count" id="cartCount" style="display: none;">0</span>
+            </button></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Authentic Ghanaian Kenkey, Made with Love</h1>
+            <p>From the heart of Accra to your table. We deliver the finest fermented corn kenkey, perfectly paired with spicy pepper sauce and fried fish. Perfect for parties, events, and large gatherings.</p>
+            <div class="hero-buttons">
+                <a href="#order" class="btn-primary">Place Large Order</a>
+                <a href="#products" class="btn-secondary">View Menu</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image">🌽</div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="feature fade-in">
+            <div class="feature-icon">🏠</div>
+            <h3>Homemade Recipe</h3>
+            <p>Traditional family recipe passed down through generations, made with authentic Ghanaian corn.</p>
+        </div>
+        <div class="feature fade-in">
+            <div class="feature-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Same-day delivery available for large orders within Accra and Tema. Nationwide shipping too.</p>
+        </div>
+        <div class="feature fade-in">
+            <div class="feature-icon">👥</div>
+            <h3>Party Size</h3>
+            <p>Specializing in bulk orders for weddings, funerals, corporate events, and family gatherings.</p>
+        </div>
+        <div class="feature fade-in">
+            <div class="feature-icon">⭐</div>
+            <h3>Premium Quality</h3>
+            <p>Only the finest ingredients. Our kenkey is fermented to perfection for that authentic sour taste.</p>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="section-header fade-in">
+            <h2>Our Menu</h2>
+            <p>Choose from our selection of authentic kenkey packages. All orders come with pepper sauce and optional fried fish.</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    🌽
+                    <span class="product-badge">Popular</span>
+                </div>
+                <div class="product-info">
+                    <h3>Classic Kenkey</h3>
+                    <p>Traditional fermented corn kenkey with spicy pepper sauce. Perfect for 1-2 people.</p>
+                    <div class="product-footer">
+                        <div class="price">₵15 <span>/ pack</span></div>
+                        <button class="add-to-cart" onclick="addToCart('Classic Kenkey', 15, '🌽')">
+                            Add to Cart +
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    🐟
+                </div>
+                <div class="product-info">
+                    <h3>Kenkey & Fish Combo</h3>
+                    <p>Classic kenkey served with crispy fried tilapia and our signature pepper sauce.</p>
+                    <div class="product-footer">
+                        <div class="price">₵35 <span>/ combo</span></div>
+                        <button class="add-to-cart" onclick="addToCart('Kenkey & Fish Combo', 35, '🐟')">
+                            Add to Cart +
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card fade-in">
+                <div class="product-image">
+                    🎉
+                    <span class="product-badge">Best Value</span>
+                </div>
+                <div class="product-info">
+                    <h3>Party Pack (10 servings)</h3>
+                    <p>Large pack perfect for small gatherings. Includes kenkey, pepper sauce, and fried fish.</p>
+                    <div class="product-footer">
+                        <div class="price">₵120 <span>/ pack</span></div>
+                        <button class="add-to-cart" onclick="addToCart('Party Pack', 120, '🎉')">
+                            Add to Cart +
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bulk Orders -->
+    <section class="bulk-order" id="bulk">
+        <h2 class="fade-in">Bulk Order Packages</h2>
+        <p class="fade-in">Planning a large event? Choose from our specially curated bulk packages for the best value.</p>
+        
+        <div class="bulk-options">
+            <div class="bulk-card fade-in" onclick="selectBulk(this, 'Small Event', 450)">
+                <h3>Small Event</h3>
+                <div class="price-tag">₵450</div>
+                <p>Serves 50 people</p>
+                <ul>
+                    <li>50 packs of kenkey</li>
+                    <li>5 liters pepper sauce</li>
+                    <li>25 pieces fried fish</li>
+                    <li>Free delivery in Accra</li>
+                </ul>
+            </div>
+
+            <div class="bulk-card fade-in" onclick="selectBulk(this, 'Medium Event', 850)">
+                <h3>Medium Event</h3>
+                <div class="price-tag">₵850</div>
+                <p>Serves 100 people</p>
+                <ul>
+                    <li>100 packs of kenkey</li>
+                    <li>10 liters pepper sauce</li>
+                    <li>50 pieces fried fish</li>
+                    <li>Free delivery in Accra</li>
+                    <li>Disposable plates & cutlery</li>
+                </ul>
+            </div>
+
+            <div class="bulk-card fade-in" onclick="selectBulk(this, 'Large Event', 1600)">
+                <h3>Large Event</h3>
+                <div class="price-tag">₵1,600</div>
+                <p>Serves 200 people</p>
+                <ul>
+                    <li>200 packs of kenkey</li>
+                    <li>20 liters pepper sauce</li>
+                    <li>100 pieces fried fish</li>
+                    <li>Free delivery + setup</li>
+                    <li>Disposable plates & cutlery</li>
+                    <li>1 server included</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form -->
+    <section class="order-section" id="order">
+        <div class="section-header fade-in">
+            <h2>Place Your Order</h2>
+            <p>Fill in your details and we'll prepare your kenkey fresh for pickup or delivery.</p>
+        </div>
+        
+        <div class="order-container fade-in">
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="customerName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="customerPhone" placeholder="024 123 4567" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="customerEmail" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery / Pickup</label>
+                        <select id="deliveryType" required>
+                            <option value="">Select option</option>
+                            <option value="delivery">Home Delivery</option>
+                            <option value="pickup">Pickup from Stand</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Delivery Address (if applicable)</label>
+                    <textarea id="customerAddress" rows="3" placeholder="Enter your full address..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Order Type</label>
+                        <select id="orderType" onchange="updateQuantity()" required>
+                            <option value="">Select package</option>
+                            <option value="classic">Classic Kenkey (₵15 each)</option>
+                            <option value="combo">Kenkey & Fish Combo (₵35 each)</option>
+                            <option value="party">Party Pack (₵120 each)</option>
+                            <option value="small">Small Event Package (₵450)</option>
+                            <option value="medium">Medium Event Package (₵850)</option>
+                            <option value="large">Large Event Package (₵1,600)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <div class="quantity-selector">
+                            <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <span class="qty-value" id="qtyValue">1</span>
+                            <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Special Instructions</label>
+                    <textarea id="specialInstructions" rows="3" placeholder="Any allergies, preferred spice level, delivery time, etc..."></textarea>
+                </div>
+
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">Estimated Total:</span>
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-dark);" id="estimatedTotal">₵0</span>
+                </div>
+
+                <button type="submit" class="submit-order">
+                    📱 Place Order via WhatsApp
+                </button>
+                <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                    You'll be redirected to WhatsApp to complete your order
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">🌽 Kenkey Stand</div>
+            <p>Bringing the authentic taste of Ghana to your doorstep. Made with love, served with pride.</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📸</a>
+                <a href="#">🐦</a>
+                <a href="https://wa.me/233558082514">📱</a>
+            </div>
+            <p style="margin-bottom: 1rem;">📍 Accra, Ghana | 📞 055 808 2514</p>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Kenkey Stand. All rights reserved. | Crafted with 🇬🇭 pride</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be inserted here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">₵0</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span class="notification-icon">✅</span>
+        <span id="notificationText">Added to cart!</span>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/233558082514" class="whatsapp-float" title="Chat on WhatsApp">
+        💬
+    </a>
+
+    <script>
+        // WhatsApp Business Number
+        const WHATSAPP_NUMBER = '233558082514';
+
+        // Cart functionality
+        let cart = [];
+        let quantity = 1;
+
+        function addToCart(name, price, emoji) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ name, price, emoji, qty: 1 });
+            }
+            updateCart();
+            showNotification(`${name} added to cart!`);
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div style="text-align: center; padding: 3rem; color: #999;">Your cart is empty</div>';
+                cartCount.style.display = 'none';
+            } else {
+                cartCount.style.display = 'flex';
+                cartCount.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+                
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${item.emoji}</div>
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>Qty: ${item.qty}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="cart-item-price">₵${item.price * item.qty}</div>
+                            <button onclick="removeFromCart(${index})" style="background: none; border: none; color: #999; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem;">Remove</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            cartTotal.textContent = `₵${total}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            toggleCart();
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showNotification(text) {
+            const notif = document.getElementById('notification');
+            document.getElementById('notificationText').textContent = text;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3000);
+        }
+
+        // Quantity selector
+        function changeQty(delta) {
+            quantity = Math.max(1, quantity + delta);
+            document.getElementById('qtyValue').textContent = quantity;
+            updateEstimatedTotal();
+        }
+
+        function updateQuantity() {
+            quantity = 1;
+            document.getElementById('qtyValue').textContent = quantity;
+            updateEstimatedTotal();
+        }
+
+        function updateEstimatedTotal() {
+            const prices = {
+                'classic': 15,
+                'combo': 35,
+                'party': 120,
+                'small': 450,
+                'medium': 850,
+                'large': 1600
+            };
+            const type = document.getElementById('orderType').value;
+            const total = (prices[type] || 0) * quantity;
+            document.getElementById('estimatedTotal').textContent = `₵${total.toLocaleString()}`;
+        }
+
+        // Bulk selection
+        function selectBulk(element, name, price) {
+            document.querySelectorAll('.bulk-card').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const map = { 'Small Event': 'small', 'Medium Event': 'medium', 'Large Event': 'large' };
+            document.getElementById('orderType').value = map[name];
+            updateEstimatedTotal();
+            
+            document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+            showNotification(`${name} package selected!`);
+        }
+
+        // Form submission with WhatsApp integration
+        function submitOrder(e) {
+            e.preventDefault();
+            
+            const type = document.getElementById('orderType').value;
+            if (!type) {
+                showNotification('Please select an order type!');
+                return;
+            }
+            
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const email = document.getElementById('customerEmail').value || 'Not provided';
+            const delivery = document.getElementById('deliveryType').value;
+            const address = document.getElementById('customerAddress').value || 'Not provided';
+            const instructions = document.getElementById('specialInstructions').value || 'None';
+            
+            const prices = {
+                'classic': 15, 'combo': 35, 'party': 120,
+                'small': 450, 'medium': 850, 'large': 1600
+            };
+            const names = {
+                'classic': 'Classic Kenkey', 'combo': 'Kenkey & Fish Combo', 'party': 'Party Pack',
+                'small': 'Small Event Package', 'medium': 'Medium Event Package', 'large': 'Large Event Package'
+            };
+            
+            const total = (prices[type] || 0) * quantity;
+            const deliveryText = delivery === 'delivery' ? 'Home Delivery' : 'Pickup';
+            
+            const message = `*NEW ORDER - Kenkey Stand*%0A%0A` +
+                `*Customer Details:*%0A` +
+                `Name: ${name}%0A` +
+                `Phone: ${phone}%0A` +
+                `Email: ${email}%0A` +
+                `Delivery: ${deliveryText}%0A` +
+                `Address: ${address}%0A%0A` +
+                `*Order Details:*%0A` +
+                `Item: ${names[type]}%0A` +
+                `Quantity: ${quantity}%0A` +
+                `Total: ₵${total.toLocaleString()}%0A%0A` +
+                `*Special Instructions:*%0A${instructions}%0A%0A` +
+                `Please confirm my order. Thank you!`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
